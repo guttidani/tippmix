@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import tippmix.ListaTarolo;
 
 
 /**
@@ -22,84 +23,124 @@ import java.util.*;
     }
 
 public class Jatek {
-
+    ArrayList<Jatekos> jatekosok;
+    int nyeroszam;
     
-    
-    JatekMester mester = new JatekMester();
-    Jatekos dani = new Jatekos("Dani");
-    Jatekos jani = new Jatekos("Jani");
-    Jatekos mate = new Jatekos("Máté");
-    
-    ArrayList<Jatekos> listazas(){
-        ArrayList<Jatekos> lista = new ArrayList<>();
-        lista.add(dani);      
-        lista.add(jani);      
-        lista.add(mate);
-    return lista;
-    
-//    ArrayList<Integer> listazas(){
-//        ArrayList<Integer> lista = new ArrayList<>();
-//        lista.add(dani.tipp);      
-//        lista.add(jani.tipp);      
-//        lista.add(mate.tipp);
-//    return lista;
+   
+    public Jatek() throws IOException {
+        JatekMester mester = new JatekMester();
+        jatekosLetrehoz();
+        jatekosok = tippmix.ListaTarolo.JatekosokTarolo;
+        nyeroszam = mester.nyeroszam;
+        ellenorzes(jatekosok);
     }
-    public Jatek() {
-        ellenorzes(listazas(), mester.nyeroszam);
+    
+    public void jatekosLetrehoz() throws IOException{
+         BufferedReader reader = new BufferedReader(
+            new InputStreamReader(System.in));
+         System.out.println("Adja meg hány játékos fog játszani: ");
+        String jatekosSzam = reader.readLine();
+        
+        for (int i = 0; i < Integer.parseInt(jatekosSzam); i++) {
+            System.out.println("Kérem adjon meg egy nevet: ");
+            String name = reader.readLine();
+            Jatekos jatekos = new Jatekos(name);
+            tippmix.ListaTarolo.JatekosokTarolo.add(jatekos);
+        }   
     }
-    void ellenorzes(ArrayList<Jatekos> list, int nyeroszam){
+    void ellenorzes(ArrayList<Jatekos> list){
         
         int fieldSize = 0;
         String intFormat = "%" + fieldSize + "d";
         String stringFormat = "%" + fieldSize + "S";
-        
         
         System.out.println("A nyerőszám: " + nyeroszam);
-        for (Jatekos tipp : list) {
-            if (tipp.tipp == nyeroszam) {
-                //System.out.printf( tipp.nev + " Tippje a " + tipp.tipp + ", ami nyert!");
-                System.out.printf("%S tippje: %d nyert \t \n",tipp.nev, tipp.tipp );
-
-            }
-            else {
-                System.out.printf("%S tippje: %d nem nyert \t \n",tipp.nev, tipp.tipp );
-                //System.out.println(tipp.nev + " Tippje a " + tipp.tipp + ", ami nem nyert!");
-            }
-        }
+        rendezgetes(list);
     }
     
-    void formatalas(int fieldSize){
+    void formatalas(String nev,int tipp, int fieldSize){
         String intFormat = "%" + fieldSize + "d";
         String stringFormat = "%" + fieldSize + "S";
+        //System.out.printf("%s tippje: %d %s \n",nev,tipp, (tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+        System.out.printf(stringFormat+" tippje:" + intFormat+ " %s \n",nev,tipp, (tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
     }
-    void Rendezgetes(){
-        // jatek konstruktorba rendezgetest meghivni
-        // swith megirasa normalisan
-        int fieldSize = 0;
-        String format = "%" + fieldSize + "d";
-        System.out.printf(format, fieldSize);
+    
+    void rendezgetes(ArrayList<Jatekos> list){
         
         Rendezes rendezeses =Rendezes.JOBBRA ;
-        switch (rendezeses){
+                
+        System.out.println("\nJOBBRA\n");
+        //rendezeses =Rendezes.BALRA ;
+         switch (rendezeses){
             case BALRA:
-                ellenorzes(listazas(), mester.nyeroszam);
+                for (Jatekos tipp : list) {
+                    //System.out.printf("%s tippje: %d %s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+                    formatalas(tipp.nev,tipp.tipp,25);
+                }
                 break;
             case KOZEPRE:
+                for (Jatekos tipp : list) {
+                    //System.out.printf("%15s tippje: %15d %15s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+                    formatalas(tipp.nev,tipp.tipp,50);
+                    }
                 break;
             case JOBBRA:
+                for (Jatekos tipp : list) {
+                    //System.out.printf("%30s tippje: %30d %30s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+                    formatalas(tipp.nev,tipp.tipp,100);
+                }
                 break;
-//            default:
-//                break;
         }
-    }
-            
-//            String beolvas() throws IOException{
-//                 // Enter data using BufferReader
-//        BufferedReader reader = new BufferedReader(
-//            new InputStreamReader(System.in));
-// 
-//        // Reading data using readLine
-//        String name = reader.readLine();
-//            return name;
-//            }
+         
+         //
+         System.out.println("\nKÖZÉP\n");
+        rendezeses =Rendezes.KOZEPRE ;
+         switch (rendezeses){
+            case BALRA:
+                for (Jatekos tipp : list) {
+                    //System.out.printf("%s tippje: %d %s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+                    formatalas(tipp.nev,tipp.tipp,25);
+                }
+                break;
+            case KOZEPRE:
+                for (Jatekos tipp : list) {
+                    //System.out.printf("%15s tippje: %15d %15s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+                    formatalas(tipp.nev,tipp.tipp,50);
+                    }
+                break;
+            case JOBBRA:
+                for (Jatekos tipp : list) {
+                    //System.out.printf("%30s tippje: %30d %30s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+                    formatalas(tipp.nev,tipp.tipp,100);
+                }
+                break;
+        }
+         //
+         
+         //
+         System.out.println("\nbalra\n");
+        rendezeses =Rendezes.BALRA ;
+         switch (rendezeses){
+            case BALRA:
+                for (Jatekos tipp : list) {
+                    //System.out.printf("%s tippje: %d %s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+                    formatalas(tipp.nev,tipp.tipp,25);
+                }
+                break;
+            case KOZEPRE:
+                for (Jatekos tipp : list) {
+                    //System.out.printf("%15s tippje: %15d %15s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+                    formatalas(tipp.nev,tipp.tipp,50);
+                    }
+                break;
+            case JOBBRA:
+                for (Jatekos tipp : list) {
+                    //System.out.printf("%30s tippje: %30d %30s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
+                    formatalas(tipp.nev,tipp.tipp,100);
+                }
+                break;
+        }
+         //
+         
+    }    
 }
