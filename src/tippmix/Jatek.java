@@ -90,57 +90,6 @@ public class Jatek {
                     formatalas(tipp.nev,tipp.tipp,100);
                 }
                 break;
-        }
-         
-         //
-         System.out.println("\nKÖZÉP\n");
-        rendezeses =Rendezes.KOZEPRE ;
-         switch (rendezeses){
-            case BALRA:
-                for (Jatekos tipp : list) {
-                    //System.out.printf("%s tippje: %d %s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
-                    formatalas(tipp.nev,tipp.tipp,25);
-                }
-                break;
-            case KOZEPRE:
-                for (Jatekos tipp : list) {
-                    //System.out.printf("%15s tippje: %15d %15s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
-                    formatalas(tipp.nev,tipp.tipp,50);
-                    }
-                break;
-            case JOBBRA:
-                for (Jatekos tipp : list) {
-                    //System.out.printf("%30s tippje: %30d %30s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
-                    formatalas(tipp.nev,tipp.tipp,100);
-                }
-                break;
-        }
-         //
-         
-         //
-         System.out.println("\nbalra\n");
-        rendezeses =Rendezes.BALRA ;
-         switch (rendezeses){
-            case BALRA:
-                for (Jatekos tipp : list) {
-                    //System.out.printf("%s tippje: %d %s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
-                    formatalas(tipp.nev,tipp.tipp,25);
-                }
-                break;
-            case KOZEPRE:
-                for (Jatekos tipp : list) {
-                    //System.out.printf("%15s tippje: %15d %15s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
-                    formatalas(tipp.nev,tipp.tipp,50);
-                    }
-                break;
-            case JOBBRA:
-                for (Jatekos tipp : list) {
-                    //System.out.printf("%30s tippje: %30d %30s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
-                    formatalas(tipp.nev,tipp.tipp,100);
-                }
-                break;
-        }
-         //
-         
+        } 
     }    
 }
