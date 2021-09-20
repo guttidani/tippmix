@@ -48,7 +48,9 @@ public class Jatek {
             tippmix.ListaTarolo.JatekosokTarolo.add(jatekos);
         }   
     }
-    void ellenorzes(ArrayList<Jatekos> list){
+    
+    
+    void ellenorzes(ArrayList<Jatekos> list) throws IOException{
         
         int fieldSize = 0;
         String intFormat = "%" + fieldSize + "d";
@@ -65,26 +67,33 @@ public class Jatek {
         System.out.printf(stringFormat+" tippje:" + intFormat+ " %s \n",nev,tipp, (tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
     }
     
-    void rendezgetes(ArrayList<Jatekos> list){
+    void rendezgetes(ArrayList<Jatekos> list) throws IOException{
         
-        Rendezes rendezeses =Rendezes.JOBBRA ;
-                
-        System.out.println("\nJOBBRA\n");
-        //rendezeses =Rendezes.BALRA ;
-         switch (rendezeses){
-            case BALRA:
+        BufferedReader reader = new BufferedReader(
+            new InputStreamReader(System.in));
+         System.out.println("jobb/bal/közép(válasszon a felsoroltak közül, csak angy betűkkel írd be):" );
+        String szovegRendez = reader.readLine();
+        
+        switch (szovegRendez){
+            case "BALRA":
+                System.out.println("\nBalra\n");
+                Rendezes rendezeses =Rendezes.BALRA ;
                 for (Jatekos tipp : list) {
                     //System.out.printf("%s tippje: %d %s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
                     formatalas(tipp.nev,tipp.tipp,25);
                 }
                 break;
-            case KOZEPRE:
+            case "KOZEPRE":
+                System.out.println("\nKözépre\n");
+                rendezeses =Rendezes.KOZEPRE ;
                 for (Jatekos tipp : list) {
                     //System.out.printf("%15s tippje: %15d %15s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
                     formatalas(tipp.nev,tipp.tipp,50);
                     }
                 break;
-            case JOBBRA:
+            case "JOBBRA":
+                System.out.println("\nJobbra\n");
+                rendezeses =Rendezes.JOBBRA ;
                 for (Jatekos tipp : list) {
                     //System.out.printf("%30s tippje: %30d %30s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
                     formatalas(tipp.nev,tipp.tipp,100);
