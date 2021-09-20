@@ -60,9 +60,9 @@ public class Jatek {
         rendezgetes(list);
     }
     
-    void formatalas(String nev,int tipp, int fieldSize){
-        String intFormat = "%" + fieldSize + "d";
-        String stringFormat = "%" + fieldSize + "S";
+    void formatalas(String nev,int tipp, int intSize, int stringSize){
+        String intFormat = "%" + intSize + "d";
+        String stringFormat = "%" + stringSize + "S";
         //System.out.printf("%s tippje: %d %s \n",nev,tipp, (tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
         System.out.printf(stringFormat+" tippje:" + intFormat+ " %s \n",nev,tipp, (tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
     }
@@ -71,7 +71,7 @@ public class Jatek {
         
         BufferedReader reader = new BufferedReader(
             new InputStreamReader(System.in));
-         System.out.println("jobb/bal/közép(válasszon a felsoroltak közül, csak angy betűkkel írd be):" );
+         System.out.println("JOBBRA/BALRA/KOZEPRE (válasszon a felsoroltak közül, csak nagy betűkkel írd be):" );
         String szovegRendez = reader.readLine();
         
         switch (szovegRendez){
@@ -80,7 +80,7 @@ public class Jatek {
                 Rendezes rendezeses =Rendezes.BALRA ;
                 for (Jatekos tipp : list) {
                     //System.out.printf("%s tippje: %d %s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
-                    formatalas(tipp.nev,tipp.tipp,25);
+                    formatalas(tipp.nev,tipp.tipp,5,6);
                 }
                 break;
             case "KOZEPRE":
@@ -88,7 +88,7 @@ public class Jatek {
                 rendezeses =Rendezes.KOZEPRE ;
                 for (Jatekos tipp : list) {
                     //System.out.printf("%15s tippje: %15d %15s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
-                    formatalas(tipp.nev,tipp.tipp,50);
+                    formatalas(tipp.nev,tipp.tipp,5,25);
                     }
                 break;
             case "JOBBRA":
@@ -96,7 +96,7 @@ public class Jatek {
                 rendezeses =Rendezes.JOBBRA ;
                 for (Jatekos tipp : list) {
                     //System.out.printf("%30s tippje: %30d %30s \n",tipp.nev,tipp.tipp, (tipp.tipp==nyeroszam? "NYERT!" : "NEM NYERT!") );
-                    formatalas(tipp.nev,tipp.tipp,100);
+                    formatalas(tipp.nev,tipp.tipp,5,50);
                 }
                 break;
         } 
